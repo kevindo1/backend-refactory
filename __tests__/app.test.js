@@ -15,10 +15,7 @@ async function createOrder({ product, quantity }) {
 
 // TODO: Remove this function & use the Order model
 async function getOrderById(id) {
-  const { rows } = await pool.query(
-    'SELECT * FROM orders WHERE id=$1;',
-    [id]
-  );
+  const { rows } = await pool.query('SELECT * FROM orders WHERE id=$1;', [id]);
 
   if (!rows[0]) return null;
 
@@ -34,7 +31,7 @@ describe('refactory routes', () => {
     pool.end();
   });
 
-  it('should be able to create an order', async () => {
+  it.only('should be able to create an order', async () => {
     const res = await request(app)
       .post('/api/v1/orders')
       .send({ product: 'Widget', quantity: 1 });
